@@ -34,7 +34,7 @@
 
 
 
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="shortcut icon" href="/blogResource/favicon.png">
 
 
 
@@ -80,7 +80,9 @@
 </script>
 
 
-    <script> yiliaConfig.jquery_ui = [false]; </script>
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
 
 
 
@@ -162,10 +164,6 @@
                         
                             <li><a href="/blogResource/archives/">所有文章</a></li>
                         
-                            <li><a href="/blogResource/tags/">标签云</a></li>
-                        
-                            <li><a href="/blogResource/about/">关于我</a></li>
-                        
                         </ul>
                     </nav>
                     <nav class="header-nav">
@@ -236,10 +234,6 @@
                     <li><a href="/blogResource/">主页</a></li>
                 
                     <li><a href="/blogResource/archives/">所有文章</a></li>
-                
-                    <li><a href="/blogResource/tags/">标签云</a></li>
-                
-                    <li><a href="/blogResource/about/">关于我</a></li>
                 
                 <div class="clearfix"></div>
                 </ul>
@@ -472,7 +466,7 @@
             }
             else {
                 var backgroundnum = 5;
-                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                var backgroundimg = "url(/blogResource/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
                 $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
             }
         })
