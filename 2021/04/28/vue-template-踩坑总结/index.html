@@ -8,13 +8,13 @@
 }</style><meta name="generator" content="Hexo 5.4.0"></head><body><header><nav><a href="/blogResource/">Home</a><a href="/blogResource/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><h1>vue-template 踩坑总结</h1><hr></div><div id="post-content"><h2 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h2><ul>
 <li>如果想要将内容抽取到全局变量里需要在项目目录下找到env开头文件比如.env.development</li>
 </ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"># 这是这个配置的名称，显然你可以有多个配置，每个配置单独一个文件，以<span class="token punctuation">.</span>env开头之后接<span class="token punctuation">.</span>xxx
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"># 这是这个配置的名称，显然你可以有多个配置，每个配置单独一个文件，以<span class="token punctuation">.</span>env开头之后接<span class="token punctuation">.</span>xxx
 # 在<span class="token keyword">package</span><span class="token punctuation">.</span>json里修改使用的配置
 # <span class="token string">"build:stage"</span><span class="token operator">:</span> <span class="token string">"vue-cli-service build --mode development"</span><span class="token punctuation">,</span>
-ENV <span class="token operator">=</span> <span class="token string">'development'</span>
+<span class="token constant">ENV</span> <span class="token operator">=</span> <span class="token string">'development'</span>
 # 全局变量
-VUE_APP_BASE_API <span class="token operator">=</span> <span class="token string">'http://localhost:9000'</span>
-VUE_APP_OSS_PATH <span class="token operator">=</span> <span class="token string">'https://guli-c1eye.oss-cn-beijing.aliyuncs.com'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token constant">VUE_APP_BASE_API</span> <span class="token operator">=</span> <span class="token string">'http://localhost:9000'</span>
+<span class="token constant">VUE_APP_OSS_PATH</span> <span class="token operator">=</span> <span class="token string">'https://guli-c1eye.oss-cn-beijing.aliyuncs.com'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>使用全局变量要注意</li>
