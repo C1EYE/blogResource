@@ -8,13 +8,13 @@
 }</style><meta name="generator" content="Hexo 5.4.0"></head><body><header><nav><a href="/blogResource/">Home</a><a href="/blogResource/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><h1>vue-template 踩坑总结</h1><hr></div><div id="post-content"><h2 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h2><ul>
 <li>如果想要将内容抽取到全局变量里需要在项目目录下找到env开头文件比如.env.development</li>
 </ul>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 这是这个配置的名称，显然你可以有多个配置，每个配置单独一个文件，以<span class="token punctuation">.</span>env开头之后接<span class="token punctuation">.</span>xxx
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"># 这是这个配置的名称，显然你可以有多个配置，每个配置单独一个文件，以<span class="token punctuation">.</span>env开头之后接<span class="token punctuation">.</span>xxx
 # 在<span class="token keyword">package</span><span class="token punctuation">.</span>json里修改使用的配置
 # <span class="token string">"build:stage"</span><span class="token operator">:</span> <span class="token string">"vue-cli-service build --mode development"</span><span class="token punctuation">,</span>
-<span class="token constant">ENV</span> <span class="token operator">=</span> <span class="token string">'development'</span>
+ENV <span class="token operator">=</span> <span class="token string">'development'</span>
 # 全局变量
-<span class="token constant">VUE_APP_BASE_API</span> <span class="token operator">=</span> <span class="token string">'http://localhost:9000'</span>
-<span class="token constant">VUE_APP_OSS_PATH</span> <span class="token operator">=</span> <span class="token string">'https://guli-c1eye.oss-cn-beijing.aliyuncs.com'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+VUE_APP_BASE_API <span class="token operator">=</span> <span class="token string">'http://localhost:9000'</span>
+VUE_APP_OSS_PATH <span class="token operator">=</span> <span class="token string">'https://guli-c1eye.oss-cn-beijing.aliyuncs.com'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>使用全局变量要注意</li>
@@ -22,28 +22,28 @@
 <blockquote>
 <p>名字一定要对应啊！！！</p>
 </blockquote>
-<pre class="line-numbers language-javaScript" data-language="javaScript"><code class="language-javaScript">&lt;template&gt;
-  &lt;div class&#x3D;&quot;home&quot;&gt;
-    &lt;!-- template中使用环境变量 --&gt;
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>home<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token comment">&lt;!-- template中使用环境变量 --></span>
      API: &#123;&#123; api &#125;&#125;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
 
-&lt;script&gt;
-export default &#123;
-  name: &quot;home&quot;,
-  data() &#123;
-    return &#123;
-      api: process.env.VUE_APP_BASE_API
-    &#125;;
-  &#125;,
-  mounted() &#123;
-    &#x2F;&#x2F; js代码中使用环境变量
-    console.log(&quot;BASE_URL: &quot;, process.env.VUE_APP_BASE_API);
-    console.log(&quot;VUE_APP_API: &quot;, process.env.VUE_APP_OSS_PATH);
-  &#125;
-&#125;;
-&lt;&#x2F;script&gt;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  name<span class="token operator">:</span> <span class="token string">"home"</span><span class="token punctuation">,</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+      api<span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">VUE_APP_BASE_API</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// js代码中使用环境变量</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"BASE_URL: "</span><span class="token punctuation">,</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">VUE_APP_BASE_API</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"VUE_APP_API: "</span><span class="token punctuation">,</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">VUE_APP_OSS_PATH</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
     <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/04/24/%E5%85%B3%E4%BA%8E%E6%88%91%E5%9C%A8%E7%BD%97%E5%BE%B7%E5%B2%9B%E5%86%99%E5%8D%9A%E5%AE%A2%E8%BF%99%E4%BB%B6%E4%BA%8B/">关于我在罗德岛写博客这件事 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
  el: '#Valine'
  , appId: ''
