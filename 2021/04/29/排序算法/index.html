@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>各类排序 | c1eye</title><script src="https://cdn.bootcss.com/valine/1.4.4/Valine.min.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.9.1/APlayer.min.js"> </script><script src="https://unpkg.com/meting@1.2/dist/Meting.min.js"></script><link rel="stylesheet" href="/blogResource/css/arknights.css"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark-reasonable.min.css"><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/blogResource/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/blogResource/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><meta name="generator" content="Hexo 5.4.0"></head><body><header><nav><a href="/blogResource/">Home</a><a href="/blogResource/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><h1>各类排序</h1><hr></div><div id="post-content"><h1 id="首先认识一下十大排序算法"><a href="#首先认识一下十大排序算法" class="headerlink" title="首先认识一下十大排序算法"></a>首先认识一下十大排序算法</h1><p><img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210515200024.png" alt="image-20210515200024075"></p>
+<ul>
+<li>冒泡，选择，插入，归并，快排，希尔，堆排序属于比较排序</li>
+</ul>
+<blockquote>
+<p>让我们从最简单的冒泡排序开始</p>
+</blockquote>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><ol>
+<li>遍历相邻两位，根据比较规则决定是否交换</li>
+<li>每次遍历都会完成一位排序，因此下次开始时可以后移一位进行比较</li>
+<li>遍历数组长度-1次之后排序完成</li>
+<li>显然如果一次遍历没有交换代表排序已经完成，这时可以提前结束循环</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> array<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+            <span class="token keyword">boolean</span> flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span> j <span class="token operator">&lt;</span> array<span class="token punctuation">.</span>length<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>array<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">></span> array<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">int</span> temp <span class="token operator">=</span> array<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                    array<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                    array<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+                    flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>flag<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="排序算法的稳定性"><a href="#排序算法的稳定性" class="headerlink" title="排序算法的稳定性"></a>排序算法的稳定性</h3><blockquote>
+<p>这里引入排序算法的稳定性这个概念</p>
+</blockquote>
+<ul>
+<li><p>如果相等的2个元素，在排序前后的相对位置保持不变，那么这是稳定的排序算法 </p>
+<p>排序前： 5 , 1 , 3 𝑎 , 4 , 7 , 3𝑏 </p>
+<p>稳定的排序： 1 , 3 𝑎 , 3 𝑏 , 4 , 5 , 7</p>
+<p>不稳定的排序：1 , 3 𝑏 , 3 𝑎 , 4, 5 , 7</p>
+</li>
+<li><p>对自定义对象进行排序时，稳定性会影响最终的排序效果</p>
+</li>
+<li><p>冒泡排序属于稳定的排序算法 </p>
+</li>
+</ul>
+<blockquote>
+<p> 稍有不慎，稳定的排序算法也能被写成不稳定的排序算法，比如下面的冒泡排序代码是不稳定的</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> end <span class="token operator">=</span> array<span class="token punctuation">.</span>length<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>end <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span> end<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> begin <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> begin<span class="token operator">&lt;</span>end<span class="token punctuation">;</span> brgin<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">cmp</span><span class="token punctuation">(</span>begin<span class="token punctuation">,</span>begin<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">>=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+			<span class="token function">swap</span><span class="token punctuation">(</span>begin<span class="token punctuation">,</span>begin<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/04/29/%E6%88%91%E6%98%AF%E4%BC%9E%E5%85%B5/">← Prev 我是伞兵</a><span style="color: #fe2"> | </span><a href="/blogResource/2021/04/28/vue-template-%E8%B8%A9%E5%9D%91%E6%80%BB%E7%BB%93/">vue-template 踩坑总结 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
+ el: '#Valine'
+ , appId: ''
+ , appKey: ''
+ , placeholder: '此条评论委托企鹅物流发送'
+})</script></div></article><aside><div id="about"><a href="/blogResource/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="https://c1eye.github.io/me/"> Dr.c1eye</a></h1><section id="total"><a id="total-archives" href="/blogResource/archives"><span class="total-title">Archives Total:</span><span class="total-number">6</span></a><div id="total-tags"><span class="total-title">Tags:</span><span class="total-number">3</span></div><div id="total-categories"><span class="total-title">Categories:</span><span class="total-number">3</span></div></section><iframe frameborder="yes"  marginheight="20" width=300 height=100 src="//music.163.com/outchain/player?type=0&id=6731415869&auto=1&height=90"></iframe></div><div id="aside-block"></div><footer><nobr><span class="text-title">©</span><span class="text-content">2019 to 2021</span></nobr><wbr><nobr><span class="text-title">ICP</span><span class="text-content">暂时没有奥</span></nobr><wbr><wbr><nobr>published with&nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo&nbsp;</a></nobr><wbr><nobr>Theme&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknight&nbsp;</a></nobr><wbr><nobr>by&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/blogResource/js/arknights.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script></body></html>
