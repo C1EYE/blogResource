@@ -104,9 +104,10 @@
 <blockquote>
 <p>选择排序的选最大值部分经过优化后就引出了堆排序</p>
 </blockquote>
+<hr>
 <h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><ol>
 <li>就地创建一个大顶堆</li>
-<li>根据大顶堆的性质，最大元素在array[0],所以每次循环交换首尾元素，同时堆的大小减1，恢复堆得性质</li>
+<li>根据大顶堆的性质，最大元素在array[0],所以每次循环交换首尾元素，同时堆的大小减1，恢复堆的性质</li>
 <li>当堆的大小为1时就完成了排序</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HeapSort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Sort</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> heapSize;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">()</span> </span>&#123;<br>        heapSize = array.length;<br>        <span class="hljs-comment">//原地建堆</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = (heapSize &gt;&gt; <span class="hljs-number">1</span>) - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            siftDown(i);<br>        &#125;<br><br>        <span class="hljs-keyword">while</span> (heapSize &gt; <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-comment">//交换堆顶元素与尾部元素</span><br>            swap(<span class="hljs-number">0</span>, --heapSize);<br>            <span class="hljs-comment">//0位置SiftDown</span><br>            siftDown(<span class="hljs-number">0</span>);<br>        &#125;<br><br><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">siftDown</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> half = heapSize &gt;&gt; <span class="hljs-number">1</span>;<br>        Integer element = array[index];<br>        <span class="hljs-keyword">while</span> (index &lt; half) &#123;<br>            <span class="hljs-keyword">int</span> childIndex = (index &lt;&lt; <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>;<br>            Integer child = array[childIndex];<br><br>            <span class="hljs-keyword">int</span> rChildIndex = childIndex + <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (rChildIndex &lt; heapSize &amp;&amp;<br>                    cmpElement(array[rChildIndex], child) &gt; <span class="hljs-number">0</span><br>            ) &#123;<br>                child = array[childIndex = rChildIndex];<br>            &#125;<br><br>            <span class="hljs-keyword">if</span> (cmpElement(element, child) &gt; <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>            array[index] = child;<br>            index = childIndex;<br>        &#125;<br>        array[index] = element;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -180,11 +181,79 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InsertSort</span>&lt;<span class="hljs-title">E</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">E</span>&gt;&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">Sort</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> begin = <span class="hljs-number">1</span>; begin &lt; array.length; begin++) &#123;<br>            <span class="hljs-keyword">int</span> cur = begin;<br>            E e = array[cur];<br>            <span class="hljs-keyword">while</span> (cur &gt; <span class="hljs-number">0</span> &amp;&amp; cmpElement(e, array[cur-<span class="hljs-number">1</span>]) &lt; <span class="hljs-number">0</span>) &#123;<br>                array[cur] = array[cur - <span class="hljs-number">1</span>];<br>                cur--;<br>            &#125;<br>            array[cur] = e;<br>        &#125;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>对于插入排序，还可以进一步优化，在这里我们先了解一下二分搜索</p>
+<p>对于插入排序，找出插入位置的算法还可以进一步优化，我们先了解一下二分搜索</p>
 </blockquote>
-<h3 id="二分搜索"><a href="#二分搜索" class="headerlink" title="二分搜索"></a>二分搜索</h3><div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/05/17/BST%E9%81%8D%E5%8E%86/">← Prev BST遍历</a><span style="color: #fe2"> | </span><a href="/blogResource/2021/04/29/%E6%88%91%E6%98%AF%E4%BC%9E%E5%85%B5/">我是伞兵 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
+<h3 id="二分搜索"><a href="#二分搜索" class="headerlink" title="二分搜索"></a>二分搜索</h3><p>如何确定一个元素在数组中的位置？（假设数组里面全都是整数） 如果是无序数组，从第 0 个位置开始遍历搜索，平均时间复杂度：O(n)</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>31</td>
+<td>66</td>
+<td>17</td>
+<td>15</td>
+<td>28</td>
+<td>20</td>
+<td>59</td>
+<td>88</td>
+<td>45</td>
+<td>56</td>
+</tr>
+</tbody></table>
+<p>如果是有序数组，可以使用二分搜索，最坏时间复杂度： O ( lo g n )</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>15</td>
+<td>17</td>
+<td>20</td>
+<td>28</td>
+<td>31</td>
+<td>45</td>
+<td>56</td>
+<td>59</td>
+<td>66</td>
+<td>88</td>
+</tr>
+</tbody></table>
+<p>假设在 [begin, end) 范围内搜索某个元素 v，</p>
+<ul>
+<li>mid == (begin + end) / 2</li>
+<li>如果 v &lt; m，去 [begin, mid) 范围内二分搜索</li>
+<li>如果 v &gt; m，去 [mid + 1, end) 范围内二分搜索</li>
+<li> 如果 v == m，直接返回 mid</li>
+</ul>
+<blockquote>
+<p> 由此可以得出一个用二分搜索确定插入位置的算法</p>
+</blockquote>
+<h3 id="优化过的插入排序"><a href="#优化过的插入排序" class="headerlink" title="优化过的插入排序"></a>优化过的插入排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br>   <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">()</span> </span>&#123;<br>       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> begin = <span class="hljs-number">1</span>; begin &lt; array.length; begin++) &#123;<br>           insert(begin, search(begin));<br>       &#125;<br>   &#125;<br><br>   <span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 插入元素</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> begin 源位置</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@param</span> dest 目标位置</span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> begin, <span class="hljs-keyword">int</span> dest)</span> </span>&#123;<br>       <span class="hljs-keyword">int</span> cur = begin;<br>       E e = array[cur];<br>       <span class="hljs-keyword">while</span> (cur != dest) &#123;<br>           array[cur] = array[cur - <span class="hljs-number">1</span>];<br>           cur--;<br>       &#125;<br>       array[dest] = e;<br>   &#125;<br><br>   <span class="hljs-comment">/**</span><br><span class="hljs-comment">    * 查找e在有序数组中插入的位置</span><br><span class="hljs-comment">    * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">    */</span><br>   <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span> </span>&#123;<br>       E e = array[index];<br>       <span class="hljs-comment">//左闭右开</span><br>       <span class="hljs-keyword">int</span> begin = <span class="hljs-number">0</span>;<br>       <span class="hljs-keyword">int</span> end = index;<br>       <span class="hljs-keyword">while</span> (begin &lt; end) &#123;<br>           <span class="hljs-keyword">int</span> mid = (begin + end) &gt;&gt; <span class="hljs-number">1</span>;<br>           <span class="hljs-keyword">if</span> (cmp(array[mid], e) &gt; <span class="hljs-number">0</span>) &#123;<br>               end = mid;<br>           &#125; <span class="hljs-keyword">else</span> &#123;<br>               begin = mid + <span class="hljs-number">1</span>;<br>           &#125;<br>       &#125;<br>       <span class="hljs-keyword">return</span> begin;<br>   &#125;<br><br></code></pre></td></tr></table></figure><div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/05/17/BST%E9%81%8D%E5%8E%86/">← Prev BST遍历</a><span style="color: #fe2"> | </span><a href="/blogResource/2021/04/29/%E6%88%91%E6%98%AF%E4%BC%9E%E5%85%B5/">我是伞兵 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
  el: '#Valine'
  , appId: ''
  , appKey: ''
  , placeholder: '此条评论委托企鹅物流发送'
-})</script></div></article><aside><div id="about"><a href="/blogResource/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="https://c1eye.github.io/me/"> Dr.c1eye</a></h1><section id="total"><a id="total-archives" href="/blogResource/archives"><span class="total-title">Archives Total:</span><span class="total-number">5</span></a><div id="total-tags"><span class="total-title">Tags:</span><span class="total-number">3</span></div><div id="total-categories"><span class="total-title">Categories:</span><span class="total-number">4</span></div></section><iframe frameborder="yes" autoplay="no" marginheight="20" width=300 height=100 src="//music.163.com/outchain/player?type=0&id=6731415869&auto=1&height=90"></iframe></div><div id="aside-block"></div><footer><nobr><span class="text-title">©</span><span class="text-content">2019 to 2021</span></nobr><wbr><nobr><span class="text-title">ICP</span><span class="text-content">暂时没有奥</span></nobr><wbr><wbr><nobr>published with&nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo&nbsp;</a></nobr><wbr><nobr>Theme&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknight&nbsp;</a></nobr><wbr><nobr>by&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/blogResource/js/arknights.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script></body></html>
+})</script></div></article><aside><div id="about"><a href="/blogResource/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="https://c1eye.github.io/me/"> Dr.c1eye</a></h1><section id="total"><a id="total-archives" href="/blogResource/archives"><span class="total-title">Archives Total:</span><span class="total-number">5</span></a><div id="total-tags"><span class="total-title">Tags:</span><span class="total-number">3</span></div><div id="total-categories"><span class="total-title">Categories:</span><span class="total-number">4</span></div></section><iframe frameborder="yes" autoplay="false" marginheight="20" width=300 height=100 src="//music.163.com/outchain/player?type=0&id=6731415869&auto=1&height=90"></iframe></div><div id="aside-block"></div><footer><nobr><span class="text-title">©</span><span class="text-content">2019 to 2021</span></nobr><wbr><nobr><span class="text-title">ICP</span><span class="text-content">暂时没有奥</span></nobr><wbr><wbr><nobr>published with&nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo&nbsp;</a></nobr><wbr><nobr>Theme&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknight&nbsp;</a></nobr><wbr><nobr>by&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/blogResource/js/arknights.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script></body></html>
