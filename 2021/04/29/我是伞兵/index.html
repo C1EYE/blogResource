@@ -34,115 +34,115 @@
 <li>题目数据保证 s 是一个有效的罗马数字，且表示整数在范围 [1, 3999] 内</li>
 <li>题目所给测试用例皆符合罗马数字书写规则，不会出现跨位等情况。<br>IL 和 IM 这样的例子并不符合题目要求，49 应该写作 XLIX，999 应该写作 CMXCIX 。</li>
 </ul>
-<h2 id="个人第一版解法"><a href="#个人第一版解法" class="headerlink" title="个人第一版解法"></a>个人第一版解法</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"> <span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">romanToInt</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Character</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">'I'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">'V'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">'X'</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">'L'</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">'C'</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">'D'</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">char</span> temp <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token class-name">Integer</span> cur<span class="token punctuation">;</span>
-        <span class="token class-name">Integer</span> last <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">boolean</span> flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            cur <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>flag<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                last <span class="token operator">=</span> cur<span class="token punctuation">;</span>
-                flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
+<h2 id="个人第一版解法"><a href="#个人第一版解法" class="headerlink" title="个人第一版解法"></a>个人第一版解法</h2><pre><code class="java">     class Solution &#123;
+        public int romanToInt(String s) &#123;
+            HashMap&lt;Character, Integer&gt; map = new HashMap&lt;&gt;();
+            map.put(&#39;I&#39;, 1);
+            map.put(&#39;V&#39;, 5);
+            map.put(&#39;X&#39;, 10);
+            map.put(&#39;L&#39;, 50);
+            map.put(&#39;C&#39;, 100);
+            map.put(&#39;D&#39;, 500);
+            map.put(&#39;M&#39;, 1000);
+            char temp = s.charAt(0);
+            int result = 0;
+            Integer cur;
+            Integer last = map.get(s.charAt(0));
+            boolean flag = false;
+            for (int i = 0; i &lt; s.length(); i++) &#123;
+                cur = map.get(s.charAt(i));
+                if (flag) &#123;
+                    last = cur;
+                    flag = false;
+                &#125;
 
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>cur<span class="token punctuation">.</span><span class="token function">compareTo</span><span class="token punctuation">(</span>last<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-                result <span class="token operator">+=</span> cur<span class="token punctuation">;</span>
-                result <span class="token operator">-=</span> <span class="token number">2</span> <span class="token operator">*</span> last<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-                last <span class="token operator">=</span> cur<span class="token punctuation">;</span>
-                result <span class="token operator">+=</span> cur<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+                if (cur.compareTo(last) &gt; 0) &#123;
+                    flag = true;
+                    result += cur;
+                    result -= 2 * last;
+                &#125; else &#123;
+                    last = cur;
+                    result += cur;
+                &#125;
+            &#125;
+            return result;
+        &#125;
+    &#125;
+</code></pre>
 <blockquote>
 <p>很遗憾除了解出来了啥也不是。</p>
 </blockquote>
 <p>思路就是值逆序排列直接加到结果上，如果出现正序排列就需要减去这个值的前一个值。</p>
 <p>由此得出第二版</p>
 <p>这次在循环外把最后的值加上。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">romanToInt</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> preNum <span class="token operator">=</span> <span class="token function">getValue</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i <span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token function">getValue</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span>preNum <span class="token operator">&lt;</span> num<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                sum <span class="token operator">-=</span> preNum<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-                sum <span class="token operator">+=</span> preNum<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            preNum <span class="token operator">=</span> num<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        sum <span class="token operator">+=</span> preNum<span class="token punctuation">;</span>
-        <span class="token keyword">return</span> sum<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+<pre><code class="java">class Solution &#123;
+    public int romanToInt(String s) &#123;
+        int sum = 0;
+        int preNum = getValue(s.charAt(0));
+        for(int i = 1;i &lt; s.length(); i ++) &#123;
+            int num = getValue(s.charAt(i));
+            if(preNum &lt; num) &#123;
+                sum -= preNum;
+            &#125; else &#123;
+                sum += preNum;
+            &#125;
+            preNum = num;
+        &#125;
+        sum += preNum;
+        return sum;
+    &#125;
     
-    <span class="token keyword">private</span> <span class="token keyword">int</span> <span class="token function">getValue</span><span class="token punctuation">(</span><span class="token keyword">char</span> ch<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">switch</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">case</span> <span class="token string">'I'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'V'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">5</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'X'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">10</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'L'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">50</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'C'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">100</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'D'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">500</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'M'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">1000</span><span class="token punctuation">;</span>
-            <span class="token keyword">default</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+    private int getValue(char ch) &#123;
+        switch(ch) &#123;
+            case &#39;I&#39;: return 1;
+            case &#39;V&#39;: return 5;
+            case &#39;X&#39;: return 10;
+            case &#39;L&#39;: return 50;
+            case &#39;C&#39;: return 100;
+            case &#39;D&#39;: return 500;
+            case &#39;M&#39;: return 1000;
+            default: return 0;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 <p>翻题解还有这样的</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">romanToInt</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        s <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"IV"</span><span class="token punctuation">,</span><span class="token string">"a"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        s <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"IX"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        s <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"XL"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        s <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"XC"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        s <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"CD"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        s <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"CM"</span><span class="token punctuation">,</span><span class="token string">"f"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="java">class Solution &#123;
+    public int romanToInt(String s) &#123;
+        s = s.replace(&quot;IV&quot;,&quot;a&quot;);
+        s = s.replace(&quot;IX&quot;,&quot;b&quot;);
+        s = s.replace(&quot;XL&quot;,&quot;c&quot;);
+        s = s.replace(&quot;XC&quot;,&quot;d&quot;);
+        s = s.replace(&quot;CD&quot;,&quot;e&quot;);
+        s = s.replace(&quot;CM&quot;,&quot;f&quot;);
         
-        <span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            result <span class="token operator">+=</span> <span class="token function">which</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+        int result = 0;
+        for (int i=0; i&lt;s.length(); i++) &#123;
+            result += which(s.charAt(i));
+        &#125;
+        return result;
+    &#125;
 
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">which</span><span class="token punctuation">(</span><span class="token keyword">char</span> ch<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">switch</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">case</span> <span class="token string">'I'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'V'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">5</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'X'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">10</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'L'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">50</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'C'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">100</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'D'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">500</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'M'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">1000</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'a'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">4</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'b'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">9</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'c'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">40</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'d'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">90</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'e'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">400</span><span class="token punctuation">;</span>
-            <span class="token keyword">case</span> <span class="token string">'f'</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">900</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+    public int which(char ch) &#123;
+        switch(ch) &#123;
+            case &#39;I&#39;: return 1;
+            case &#39;V&#39;: return 5;
+            case &#39;X&#39;: return 10;
+            case &#39;L&#39;: return 50;
+            case &#39;C&#39;: return 100;
+            case &#39;D&#39;: return 500;
+            case &#39;M&#39;: return 1000;
+            case &#39;a&#39;: return 4;
+            case &#39;b&#39;: return 9;
+            case &#39;c&#39;: return 40;
+            case &#39;d&#39;: return 90;
+            case &#39;e&#39;: return 400;
+            case &#39;f&#39;: return 900;
+        &#125;
+        return 0;
+    &#125;
+&#125;
+</code></pre>
 <p>总结：我是伞兵</p><div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/05/17/BST%E9%81%8D%E5%8E%86/">← Prev BST遍历</a><span style="color: #fe2"> | </span><a href="/blogResource/2021/04/29/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">各类排序 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
  el: '#Valine'
  , appId: ''
