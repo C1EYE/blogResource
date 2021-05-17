@@ -34,116 +34,20 @@
 <li>题目数据保证 s 是一个有效的罗马数字，且表示整数在范围 [1, 3999] 内</li>
 <li>题目所给测试用例皆符合罗马数字书写规则，不会出现跨位等情况。<br>IL 和 IM 这样的例子并不符合题目要求，49 应该写作 XLIX，999 应该写作 CMXCIX 。</li>
 </ul>
-<h2 id="个人第一版解法"><a href="#个人第一版解法" class="headerlink" title="个人第一版解法"></a>个人第一版解法</h2><pre><code class="java">     class Solution &#123;
-        public int romanToInt(String s) &#123;
-            HashMap&lt;Character, Integer&gt; map = new HashMap&lt;&gt;();
-            map.put(&#39;I&#39;, 1);
-            map.put(&#39;V&#39;, 5);
-            map.put(&#39;X&#39;, 10);
-            map.put(&#39;L&#39;, 50);
-            map.put(&#39;C&#39;, 100);
-            map.put(&#39;D&#39;, 500);
-            map.put(&#39;M&#39;, 1000);
-            char temp = s.charAt(0);
-            int result = 0;
-            Integer cur;
-            Integer last = map.get(s.charAt(0));
-            boolean flag = false;
-            for (int i = 0; i &lt; s.length(); i++) &#123;
-                cur = map.get(s.charAt(i));
-                if (flag) &#123;
-                    last = cur;
-                    flag = false;
-                &#125;
+<h2 id="个人第一版解法"><a href="#个人第一版解法" class="headerlink" title="个人第一版解法"></a>个人第一版解法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">romanToInt</span><span class="hljs-params">(String s)</span> </span>&#123;<br>        HashMap&lt;Character, Integer&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br>        map.put(<span class="hljs-string">&#x27;I&#x27;</span>, <span class="hljs-number">1</span>);<br>        map.put(<span class="hljs-string">&#x27;V&#x27;</span>, <span class="hljs-number">5</span>);<br>        map.put(<span class="hljs-string">&#x27;X&#x27;</span>, <span class="hljs-number">10</span>);<br>        map.put(<span class="hljs-string">&#x27;L&#x27;</span>, <span class="hljs-number">50</span>);<br>        map.put(<span class="hljs-string">&#x27;C&#x27;</span>, <span class="hljs-number">100</span>);<br>        map.put(<span class="hljs-string">&#x27;D&#x27;</span>, <span class="hljs-number">500</span>);<br>        map.put(<span class="hljs-string">&#x27;M&#x27;</span>, <span class="hljs-number">1000</span>);<br>        <span class="hljs-keyword">char</span> temp = s.charAt(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">int</span> result = <span class="hljs-number">0</span>;<br>        Integer cur;<br>        Integer last = map.get(s.charAt(<span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">boolean</span> flag = <span class="hljs-keyword">false</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s.length(); i++) &#123;<br>            cur = map.get(s.charAt(i));<br>            <span class="hljs-keyword">if</span> (flag) &#123;<br>                last = cur;<br>                flag = <span class="hljs-keyword">false</span>;<br>            &#125;<br><br>            <span class="hljs-keyword">if</span> (cur.compareTo(last) &gt; <span class="hljs-number">0</span>) &#123;<br>                flag = <span class="hljs-keyword">true</span>;<br>                result += cur;<br>                result -= <span class="hljs-number">2</span> * last;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                last = cur;<br>                result += cur;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-                if (cur.compareTo(last) &gt; 0) &#123;
-                    flag = true;
-                    result += cur;
-                    result -= 2 * last;
-                &#125; else &#123;
-                    last = cur;
-                    result += cur;
-                &#125;
-            &#125;
-            return result;
-        &#125;
-    &#125;
-</code></pre>
 <blockquote>
 <p>很遗憾除了解出来了啥也不是。</p>
 </blockquote>
 <p>思路就是值逆序排列直接加到结果上，如果出现正序排列就需要减去这个值的前一个值。</p>
 <p>由此得出第二版</p>
 <p>这次在循环外把最后的值加上。</p>
-<pre><code class="java">class Solution &#123;
-    public int romanToInt(String s) &#123;
-        int sum = 0;
-        int preNum = getValue(s.charAt(0));
-        for(int i = 1;i &lt; s.length(); i ++) &#123;
-            int num = getValue(s.charAt(i));
-            if(preNum &lt; num) &#123;
-                sum -= preNum;
-            &#125; else &#123;
-                sum += preNum;
-            &#125;
-            preNum = num;
-        &#125;
-        sum += preNum;
-        return sum;
-    &#125;
-    
-    private int getValue(char ch) &#123;
-        switch(ch) &#123;
-            case &#39;I&#39;: return 1;
-            case &#39;V&#39;: return 5;
-            case &#39;X&#39;: return 10;
-            case &#39;L&#39;: return 50;
-            case &#39;C&#39;: return 100;
-            case &#39;D&#39;: return 500;
-            case &#39;M&#39;: return 1000;
-            default: return 0;
-        &#125;
-    &#125;
-&#125;
-</code></pre>
-<p>翻题解还有这样的</p>
-<pre><code class="java">class Solution &#123;
-    public int romanToInt(String s) &#123;
-        s = s.replace(&quot;IV&quot;,&quot;a&quot;);
-        s = s.replace(&quot;IX&quot;,&quot;b&quot;);
-        s = s.replace(&quot;XL&quot;,&quot;c&quot;);
-        s = s.replace(&quot;XC&quot;,&quot;d&quot;);
-        s = s.replace(&quot;CD&quot;,&quot;e&quot;);
-        s = s.replace(&quot;CM&quot;,&quot;f&quot;);
-        
-        int result = 0;
-        for (int i=0; i&lt;s.length(); i++) &#123;
-            result += which(s.charAt(i));
-        &#125;
-        return result;
-    &#125;
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">romanToInt</span><span class="hljs-params">(String s)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> preNum = getValue(s.charAt(<span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;i &lt; s.length(); i ++) &#123;<br>            <span class="hljs-keyword">int</span> num = getValue(s.charAt(i));<br>            <span class="hljs-keyword">if</span>(preNum &lt; num) &#123;<br>                sum -= preNum;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                sum += preNum;<br>            &#125;<br>            preNum = num;<br>        &#125;<br>        sum += preNum;<br>        <span class="hljs-keyword">return</span> sum;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getValue</span><span class="hljs-params">(<span class="hljs-keyword">char</span> ch)</span> </span>&#123;<br>        <span class="hljs-keyword">switch</span>(ch) &#123;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;I&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;V&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;X&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;L&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">50</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;C&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">100</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;D&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">500</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;M&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">1000</span>;<br>            <span class="hljs-keyword">default</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-    public int which(char ch) &#123;
-        switch(ch) &#123;
-            case &#39;I&#39;: return 1;
-            case &#39;V&#39;: return 5;
-            case &#39;X&#39;: return 10;
-            case &#39;L&#39;: return 50;
-            case &#39;C&#39;: return 100;
-            case &#39;D&#39;: return 500;
-            case &#39;M&#39;: return 1000;
-            case &#39;a&#39;: return 4;
-            case &#39;b&#39;: return 9;
-            case &#39;c&#39;: return 40;
-            case &#39;d&#39;: return 90;
-            case &#39;e&#39;: return 400;
-            case &#39;f&#39;: return 900;
-        &#125;
-        return 0;
-    &#125;
-&#125;
-</code></pre>
-<p>总结：我是伞兵</p><div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/05/17/BST%E9%81%8D%E5%8E%86/">← Prev BST遍历</a><span style="color: #fe2"> | </span><a href="/blogResource/2021/04/29/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">各类排序 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
+<p>翻题解还有这样的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">romanToInt</span><span class="hljs-params">(String s)</span> </span>&#123;<br>        s = s.replace(<span class="hljs-string">&quot;IV&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>);<br>        s = s.replace(<span class="hljs-string">&quot;IX&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>);<br>        s = s.replace(<span class="hljs-string">&quot;XL&quot;</span>,<span class="hljs-string">&quot;c&quot;</span>);<br>        s = s.replace(<span class="hljs-string">&quot;XC&quot;</span>,<span class="hljs-string">&quot;d&quot;</span>);<br>        s = s.replace(<span class="hljs-string">&quot;CD&quot;</span>,<span class="hljs-string">&quot;e&quot;</span>);<br>        s = s.replace(<span class="hljs-string">&quot;CM&quot;</span>,<span class="hljs-string">&quot;f&quot;</span>);<br>        <br>        <span class="hljs-keyword">int</span> result = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;s.length(); i++) &#123;<br>            result += which(s.charAt(i));<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">which</span><span class="hljs-params">(<span class="hljs-keyword">char</span> ch)</span> </span>&#123;<br>        <span class="hljs-keyword">switch</span>(ch) &#123;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;I&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;V&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;X&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;L&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">50</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;C&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">100</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;D&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">500</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;M&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">1000</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;a&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;b&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">9</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;c&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">40</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;d&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">90</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;e&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">400</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;f&#x27;</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">900</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>总结：我是伞兵</p><div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/04/29/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">← Prev 各类排序</a><span style="color: #fe2"> | </span><a href="/blogResource/2021/04/28/vue-template-%E8%B8%A9%E5%9D%91%E6%80%BB%E7%BB%93/">vue-template 踩坑总结 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
  el: '#Valine'
  , appId: ''
  , appKey: ''

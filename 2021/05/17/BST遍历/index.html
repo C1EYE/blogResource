@@ -13,32 +13,10 @@
 <li>如果栈非空，出栈一个节点，重复2</li>
 <li>否则结束遍历</li>
 </ol>
-<pre><code class="java">public void preorder(Visitor&lt;E&gt; visitor) &#123;
-        if(visitor == null || root == null)&#123;
-            return;
-        &#125;
-        Node&lt;E&gt; node = root;
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">preorder</span><span class="hljs-params">(Visitor&lt;E&gt; visitor)</span> </span>&#123;<br>		<span class="hljs-keyword">if</span>(visitor == <span class="hljs-keyword">null</span> || root == <span class="hljs-keyword">null</span>)&#123;<br>			<span class="hljs-keyword">return</span>;<br>		&#125;<br>		Node&lt;E&gt; node = root;<br><br>		Stack&lt;Node&lt;E&gt;&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();<br><br>		<span class="hljs-keyword">while</span>(<span class="hljs-keyword">true</span>)&#123;<br>			<span class="hljs-keyword">if</span>(node!=<span class="hljs-keyword">null</span>)&#123;<br>				<span class="hljs-keyword">if</span>(visitor.visit(node.element)) &#123;<br>                    <span class="hljs-keyword">return</span>;<br>                &#125;<br>				<span class="hljs-keyword">if</span>(node.right!=<span class="hljs-keyword">null</span>)&#123;<br>					stack.push(node.right);<br>				&#125;<br>				node = node.left;<br>			&#125;<span class="hljs-keyword">else</span>&#123;<br>				<span class="hljs-keyword">if</span>(stack.isEmpty())&#123;<br>					<span class="hljs-keyword">return</span>;<br>				&#125;<br>				node = stack.pop();<br>			&#125;<br>		&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-        Stack&lt;Node&lt;E&gt;&gt; stack = new Stack&lt;&gt;();
 
-        while(true)&#123;
-            if(node!=null)&#123;
-                if(visitor.visit(node.element)) &#123;
-                    return;
-                &#125;
-                if(node.right!=null)&#123;
-                    stack.push(node.right);
-                &#125;
-                node = node.left;
-            &#125;else&#123;
-                if(stack.isEmpty())&#123;
-                    return;
-                &#125;
-                node = stack.pop();
-            &#125;
-        &#125;
-&#125;
-</code></pre>
+
 <ul>
 <li>显然时间复杂度就是O(n)，空间复杂度O(n)</li>
 </ul>
@@ -53,31 +31,10 @@
 <li>如果<strong>当前节点为空并且栈不为空</strong>，出栈一个节点，访问它并将node指向这个节点的右节点，重复2</li>
 <li>否则遍历结束</li>
 </ol>
-<pre><code class="java">public void inorder(Visitor&lt;E&gt; visitor) &#123;
-        if(visitor==null||root == null)&#123;
-            return;
-        &#125;
-        Node&lt;E&gt; node = root;
-        Stack&lt;Node&lt;E&gt;&gt; stack = new Stack&lt;&gt;();
-        while (true)&#123;
-            if(node!=null)&#123;
-                stack.push(node);
-                node = node.left;
-            &#125;else &#123;
-                if(stack.isEmpty())&#123;
-                    return;
-                &#125;
-                node = stack.pop();
-                if(visitor.visit(node.element))&#123;
-                    return;
-                &#125;
-                node = node.right;
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">inorder</span><span class="hljs-params">(Visitor&lt;E&gt; visitor)</span> </span>&#123;<br>	    <span class="hljs-keyword">if</span>(visitor==<span class="hljs-keyword">null</span>||root == <span class="hljs-keyword">null</span>)&#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        Node&lt;E&gt; node = root;<br>        Stack&lt;Node&lt;E&gt;&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();<br>	    <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>)&#123;<br>	        <span class="hljs-keyword">if</span>(node!=<span class="hljs-keyword">null</span>)&#123;<br>                stack.push(node);<br>                node = node.left;<br>            &#125;<span class="hljs-keyword">else</span> &#123;<br>	            <span class="hljs-keyword">if</span>(stack.isEmpty())&#123;<br>                    <span class="hljs-keyword">return</span>;<br>                &#125;<br>                node = stack.pop();<br>	            <span class="hljs-keyword">if</span>(visitor.visit(node.element))&#123;<br>                    <span class="hljs-keyword">return</span>;<br>                &#125;<br>				node = node.right;<br><br>            &#125;<br><br>	    &#125;<br>	   <br></code></pre></td></tr></table></figure>
 
-            &#125;
 
-        &#125;
-       
-</code></pre>
+
 <h2 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h2><img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210514194526.png" alt="image-20210514194526599" style="zoom:33%;" />
 
 <p>思路:</p>
@@ -88,36 +45,10 @@
 <li>否则出栈该节点，访问并维护prev指向，重复2，3</li>
 <li>栈空遍历结束</li>
 </ol>
-<pre><code class="java">public void postorder(Visitor&lt;E&gt; visitor) &#123;
-        if (visitor == null || root == null) &#123;
-            return;
-        &#125;
-
-        Stack&lt;Node&lt;E&gt;&gt; stack = new Stack&lt;&gt;();
-        stack.push(root);
-        Node&lt;E&gt; top;
-        Node&lt;E&gt; prev = null;
-        while (!stack.isEmpty()) &#123;
-            top = stack.peek();
-
-            if (top.isLeaf() || (prev != null &amp;&amp; prev.parent == top)) &#123;
-                prev = stack.pop();
-                if (visitor.visit(prev.element)) &#123;
-                    return;
-                &#125;
-            &#125; else &#123;
-                if (top.right != null) &#123;
-                    stack.push(stack.peek().right);
-                &#125;
-                if (top.left != null) &#123;
-                    stack.push(top.left);
-                &#125;
-            &#125;
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">postorder</span><span class="hljs-params">(Visitor&lt;E&gt; visitor)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (visitor == <span class="hljs-keyword">null</span> || root == <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        Stack&lt;Node&lt;E&gt;&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();<br>        stack.push(root);<br>        Node&lt;E&gt; top;<br>        Node&lt;E&gt; prev = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">while</span> (!stack.isEmpty()) &#123;<br>            top = stack.peek();<br><br>            <span class="hljs-keyword">if</span> (top.isLeaf() || (prev != <span class="hljs-keyword">null</span> &amp;&amp; prev.parent == top)) &#123;<br>                prev = stack.pop();<br>                <span class="hljs-keyword">if</span> (visitor.visit(prev.element)) &#123;<br>                    <span class="hljs-keyword">return</span>;<br>                &#125;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">if</span> (top.right != <span class="hljs-keyword">null</span>) &#123;<br>                    stack.push(stack.peek().right);<br>                &#125;<br>                <span class="hljs-keyword">if</span> (top.left != <span class="hljs-keyword">null</span>) &#123;<br>                    stack.push(top.left);<br>                &#125;<br>            &#125;<br><br><br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
 
 
-        &#125;
-    &#125;
-</code></pre>
+
 <h2 id="前序遍历的另一种方法"><a href="#前序遍历的另一种方法" class="headerlink" title="前序遍历的另一种方法"></a>前序遍历的另一种方法</h2><p>思路:</p>
 <ol>
 <li>创建栈，根节点入队</li>
@@ -125,27 +56,16 @@
 <li>入栈节点右孩子节点和左孩子节点（前提不为空），重复2</li>
 <li>栈空遍历结束</li>
 </ol>
-<pre><code class="java"> public void preorder2(Visitor&lt;E&gt; visitor) &#123;
-        if (visitor == null || root == null) &#123;
-            return;
-        &#125;
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">preorder2</span><span class="hljs-params">(Visitor&lt;E&gt; visitor)</span> </span>&#123;<br>       <span class="hljs-keyword">if</span> (visitor == <span class="hljs-keyword">null</span> || root == <span class="hljs-keyword">null</span>) &#123;<br>           <span class="hljs-keyword">return</span>;<br>       &#125;<br><br>       Stack&lt;Node&lt;E&gt;&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();<br>       stack.push(root);<br>       <span class="hljs-keyword">while</span> (!stack.isEmpty()) &#123;<br>           Node&lt;E&gt; node = stack.pop();<br>           <span class="hljs-keyword">if</span>(visitor.visit(node.element))&#123;<br>               <span class="hljs-keyword">return</span>;<br>           &#125;<br>           <span class="hljs-keyword">if</span>(node.right!=<span class="hljs-keyword">null</span>)&#123;<br>               stack.push(node.right);<br>           &#125;<br>           <span class="hljs-keyword">if</span>(node.left!=<span class="hljs-keyword">null</span>)&#123;<br>               stack.push(node.left);<br>           &#125;<br><br>       &#125;<br></code></pre></td></tr></table></figure>
 
-        Stack&lt;Node&lt;E&gt;&gt; stack = new Stack&lt;&gt;();
-        stack.push(root);
-        while (!stack.isEmpty()) &#123;
-            Node&lt;E&gt; node = stack.pop();
-            if(visitor.visit(node.element))&#123;
-                return;
-            &#125;
-            if(node.right!=null)&#123;
-                stack.push(node.right);
-            &#125;
-            if(node.left!=null)&#123;
-                stack.push(node.left);
-            &#125;
 
-        &#125;
-</code></pre>
+
+
+
+
+
+
+
 <p>总结：</p>
 <blockquote>
 <p>总的来说使用非递归遍历树主要就是先到达叶子节点，然后处理边界问题,后序遍历稍特殊，需要判断是否为叶子节点来确保遍历所有节点。</p>
@@ -153,7 +73,7 @@
 <ul>
 <li>这里的visotor没什么必要，这是用来在递归算法里标记是否结束</li>
 </ul>
-<div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/04/29/%E6%88%91%E6%98%AF%E4%BC%9E%E5%85%B5/">我是伞兵 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
+<div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/04/29/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">各类排序 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
  el: '#Valine'
  , appId: ''
  , appKey: ''
