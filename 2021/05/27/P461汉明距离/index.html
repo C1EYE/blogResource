@@ -5,7 +5,7 @@
 @font-face {
  font-family: 'JetBrains Mono';
  src: local('JetBrains Mono'), url('/blogResource/font/JetBrainsMono-Regular.woff2') format('woff2');
-}</style><meta name="generator" content="Hexo 5.4.0"></head><body><header><nav><a href="/blogResource/">Home</a><a href="/blogResource/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><h1>P461汉明距离</h1><hr></div><div id="post-content"><ul>
+}</style><meta name="generator" content="Hexo 5.4.0"></head><body><header><nav><a href="/blogResource/">Home</a><a href="/blogResource/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><h1>P461汉明距离</h1><hr></div><div id="post-content"><h2 id="个人思路"><a href="#个人思路" class="headerlink" title="个人思路"></a>个人思路</h2><ul>
 <li>今天的题纯粹就是考察位运算</li>
 <li>一次异或将不同位置1，然后统计1的个数</li>
 <li>待会看看评论区有无黑魔法</li>
@@ -13,7 +13,16 @@
 <p><img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210527002705.png"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hammingDistance</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> </span>&#123;<br>         x = x ^ y;<br>            <span class="hljs-keyword">int</span> result = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">while</span> (x != <span class="hljs-number">0</span>) &#123;<br>                result+=x&amp;<span class="hljs-number">1</span>;<br>                x = x &gt;&gt; <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210527002852.png"></p><div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/05/26/P1190%E5%8F%8D%E8%BD%AC%E6%AF%8F%E5%AF%B9%E6%8B%AC%E5%8F%B7%E9%97%B4%E7%9A%84%E5%AD%90%E4%B8%B2/">P1190反转每对括号间的子串 Next →</a><hr></div><div id="bottom-btn"><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
+<p><img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210527002852.png"></p>
+<ul>
+<li>果然有</li>
+</ul>
+<h2 id="Brian-Kernighan-算法"><a href="#Brian-Kernighan-算法" class="headerlink" title="Brian Kernighan 算法"></a>Brian Kernighan 算法</h2><ul>
+<li> x&amp;(x-1)刚好可以消掉最右侧的1</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210527003629.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"> x = x ^ y;<br><span class="hljs-keyword">int</span> result = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">while</span> (x!=<span class="hljs-number">0</span>) &#123;<br>    x &amp;= (x - <span class="hljs-number">1</span>);<br>    result++;<br>&#125;<br><span class="hljs-keyword">return</span> result;<br></code></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210527004407.png"></p><div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/05/26/P1190%E5%8F%8D%E8%BD%AC%E6%AF%8F%E5%AF%B9%E6%8B%AC%E5%8F%B7%E9%97%B4%E7%9A%84%E5%AD%90%E4%B8%B2/">P1190反转每对括号间的子串 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
  el: '#Valine'
  , appId: ''
  , appKey: ''
