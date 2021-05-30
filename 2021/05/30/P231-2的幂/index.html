@@ -8,12 +8,12 @@
 @font-face {
  font-family: 'JetBrains Mono';
  src: local('JetBrains Mono'), url('/blogResource/font/JetBrainsMono-Regular.woff2') format('woff2');
-}</style><meta name="generator" content="Hexo 5.4.0"></head><body><header><nav><a href="/blogResource/">Home</a><a href="/blogResource/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><h1>P231 2的幂</h1><hr></div><div id="post-content"><img src="/Users/c1eye/Library/Application Support/typora-user-images/image-20210530100106429.png" alt="image-20210530100106429" style="zoom:50%;" />
+}</style><meta name="generator" content="Hexo 5.4.0"></head><body><header><nav><a href="/blogResource/">Home</a><a href="/blogResource/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><h1>P231 2的幂</h1><hr></div><div id="post-content"><img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210530102806.png" alt="image-20210530100106429" style="zoom:50%;" />
 
 <ul>
 <li>今天的题比较简单，经过观察可以发现2的整数幂的二进制表示都为单独的一个1</li>
 </ul>
-<img src="/Users/c1eye/Library/Application Support/typora-user-images/image-20210530100244394.png" alt="image-20210530100244394" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210530102816.png" alt="image-20210530100244394" style="zoom:50%;" />
 
 <ul>
 <li>之前了解过如果x&amp;(x-1)就可以消掉最右侧的1，消掉之后如果等于0，就表示只有一个1</li>
@@ -22,7 +22,7 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isPowerOfTwo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span>  n&gt;<span class="hljs-number">0</span>&amp;&amp;((n&amp;(n-<span class="hljs-number">1</span>))==<span class="hljs-number">0</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<img src="/Users/c1eye/Library/Application Support/typora-user-images/image-20210530100636322.png" alt="image-20210530100636322" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210530102819.png" alt="image-20210530100636322" style="zoom:50%;" />
 
 <h2 id="这里再介绍一个位运算技巧"><a href="#这里再介绍一个位运算技巧" class="headerlink" title="这里再介绍一个位运算技巧"></a>这里再介绍一个位运算技巧</h2><p> <strong>n &amp; (-n)</strong></p>
 <ul>
@@ -34,7 +34,7 @@
 <p>所以如果n是2的正整数，且n&amp;(-n)=n,n是2的整数幂</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isPowerOfTwo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span>  n&gt;<span class="hljs-number">0</span>&amp;&amp;(n==( n&amp;(-n)));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<img src="/Users/c1eye/Library/Application Support/typora-user-images/image-20210530102230650.png" alt="image-20210530102230650" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210530102824.png" alt="image-20210530102230650" style="zoom:50%;" />
 
 <h2 id="另一种解法"><a href="#另一种解法" class="headerlink" title="另一种解法"></a>另一种解法</h2><ul>
 <li><p>当前环境下2的最大整数幂是2^30</p>
@@ -44,7 +44,7 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isPowerOfTwo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span>  n&gt;<span class="hljs-number">0</span>&amp;&amp;(<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">30</span>)%n==<span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<img src="/Users/c1eye/Library/Application Support/typora-user-images/image-20210530102341488.png" alt="image-20210530102341488" style="zoom:50%;" /><div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/05/29/P1074%E5%85%83%E7%B4%A0%E5%92%8C%E4%B8%BA%E7%9B%AE%E6%A0%87%E5%80%BC%E7%9A%84%E5%AD%90%E7%9F%A9%E9%98%B5%E6%95%B0%E9%87%8F/">P1074元素和为目标值的子矩阵数量 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
+<img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210530102829.png" alt="image-20210530102341488" style="zoom:50%;" /><div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/05/29/P1074%E5%85%83%E7%B4%A0%E5%92%8C%E4%B8%BA%E7%9B%AE%E6%A0%87%E5%80%BC%E7%9A%84%E5%AD%90%E7%9F%A9%E9%98%B5%E6%95%B0%E9%87%8F/">P1074元素和为目标值的子矩阵数量 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
  el: '#Valine'
  , appId: 'CFK5c68KCzaUK5MxVVKuuOjN-gzGzoHsz'
  , appKey: 'L4ywj7c9vQ7c73moKeMNsKLF'
