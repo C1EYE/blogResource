@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>P525 连续数组 | c1eye</title><script src="https://cdn.bootcss.com/valine/1.4.4/Valine.min.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.9.1/APlayer.min.js"> </script><script src="https://unpkg.com/meting@1.2/dist/Meting.min.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/mermaid/8.8.2/mermaid.min.js"></script><script>mermaid.initialize({
+  startOnLoad: true
+  , theme: 'dark'
+});</script><link rel="stylesheet" href="/blogResource/css/arknights.css"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark-reasonable.min.css"><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/blogResource/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/blogResource/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><meta name="generator" content="Hexo 5.4.0"></head><body><header><nav><a href="/blogResource/">Home</a><a href="/blogResource/archives/">Archives</a></nav></header><main><article><div id="post-bg"><div id="post-title"><h1>P525 连续数组</h1><hr></div><div id="post-content"><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210603083657.png" alt="image-20210603083656894"></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>关键词检索：最长连续子数组，又到了喜闻乐见的前缀和哈希表环节</li>
+<li>0，1个数相等，如果将0转化为-1，它们的和将为0，将题目转化为求和为零的最大连续子数组</li>
+<li>在map中先放入(0,-1),我们认为前0项和为0，位于-1（常规操作啦）</li>
+<li>遍历数组，用一个变量保存当前的前n项和，遇到0视为-1</li>
+<li>如果在map中找到key = 当前前n项和，那就说明从map中取出的index+1到i的数组和为零（有相同个0，1）</li>
+</ul>
+<blockquote>
+<p>显然，如果两个连续子数组和相等，而且是包含关系，那么大的数组减去小的数组后的和为0</p>
+</blockquote>
+<ul>
+<li>这个子数组的长度可以用i-index来计算出</li>
+<li>如果找不到就将当前的前n项和以及索引加入map，因为要找最大的连续子数组，所以没必要更新</li>
+</ul>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findMaxLength</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;<br>            <span class="hljs-keyword">int</span> prev = <span class="hljs-number">0</span>;<br>            HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br>            <span class="hljs-keyword">int</span> max = <span class="hljs-number">0</span>;<br>            map.put(<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;<br>                prev += nums[i] == <span class="hljs-number">0</span> ? -<span class="hljs-number">1</span> : <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (map.containsKey(prev)) &#123;<br>                    max = Math.max(i - map.get(prev), max);<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    map.put(prev, i);<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">return</span> max;<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/C1EYE/figureBed/main/img/20210603084119.png" alt="image-20210603084119499"></p>
+<h2 id="一点屁话"><a href="#一点屁话" class="headerlink" title="一点屁话"></a>一点屁话</h2><ul>
+<li>感觉每次做这类题都差点感觉</li>
+<li>还是做得少</li>
+</ul><div id="paginator"></div></div><div id="post-footer"><hr><a href="/blogResource/2021/06/02/P523-%E8%BF%9E%E7%BB%AD%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/">P523 连续的子数组和 Next →</a><hr></div><div id="bottom-btn"><a id="to-index" href="#post-index" title="index">≡</a><a id="to-top" href="#post-title" title="to top">∧</a></div><div id="Valine"></div><script>new Valine({
+ el: '#Valine'
+ , appId: 'CFK5c68KCzaUK5MxVVKuuOjN-gzGzoHsz'
+ , appKey: 'L4ywj7c9vQ7c73moKeMNsKLF'
+ , placeholder: '此条评论委托企鹅物流发送'
+})</script></div></article><aside><div id="about"><a href="/blogResource/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="https://c1eye.github.io/me/"> Dr.c1eye</a></h1><section id="total"><a id="total-archives" href="/blogResource/archives"><span class="total-title">Archives Total:</span><span class="total-number">18</span></a><div id="total-tags"><span class="total-title">Tags:</span><span class="total-number">10</span></div><div id="total-categories"><span class="total-title">Categories:</span><span class="total-number">8</span></div></section><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+<script src="https://blog-static.cnblogs.com/files/yjlaugus/APlayer.min.js"></script>
+<div id="aplayer" class="aplayer"  data-id="6731415869" data-server="netease" data-type="playlist" data-fixed="true" data-listfolded="true" data-order="random" data-theme="#F58EA8"></div>
+<script src="https://unpkg.com/meting@1.2/dist/Meting.min.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问<span id="busuanzi_value_site_pv"></span>次</span></div><div id="aside-block"></div><footer><nobr><span class="text-title">©</span><span class="text-content">2019 to 2021</span></nobr><wbr><nobr><span class="text-title">ICP</span><span class="text-content">暂时没有奥</span></nobr><wbr><wbr><nobr>published with&nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo&nbsp;</a></nobr><wbr><nobr>Theme&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknight&nbsp;</a></nobr><wbr><nobr>by&nbsp;<a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/blogResource/js/arknights.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script></body></html>
